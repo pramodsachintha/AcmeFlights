@@ -15,7 +15,7 @@ namespace Domain.Aggregates.FlightAggregate
         public DateTimeOffset Arrival { get; private set; }
 
         private List<FlightRate> _rates;
-        public IReadOnlyCollection<FlightRate> Rates => _rates;
+        public IReadOnlyCollection<FlightRate> Rates => _rates.AsReadOnly();
 
         protected Flight()
         {
