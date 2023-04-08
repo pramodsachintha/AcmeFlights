@@ -55,6 +55,12 @@ namespace Domain.Aggregates.FlightAggregate
             AddDomainEvent(new FlightRateAvailabilityChangedEvent(this, rate, mutation));
         }
 
+        public bool IsFlightAvailable(Guid rateId, int orderedAmount)
+        {
+            var availability = GetRate(rateId).Available;
+            return orderedAmount <= availability;
+        }
+
         private FlightRate GetRate(Guid rateId)
         {
             var rate = _rates.SingleOrDefault(o => o.Id == rateId);
@@ -66,5 +72,6 @@ namespace Domain.Aggregates.FlightAggregate
 
             return rate;
         }
+
     }
 }
