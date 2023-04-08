@@ -25,7 +25,7 @@ namespace Domain.Aggregates.OrderAggregate
 
         private readonly List<OrderItem> _orderItems;
 
-        public IReadOnlyCollection<OrderItem> OrderItems => _orderItems;
+        public IReadOnlyCollection<OrderItem> OrderItems => _orderItems.AsReadOnly();
 
         public Order(bool isRoundTrip, decimal taxRate) : this()
         {

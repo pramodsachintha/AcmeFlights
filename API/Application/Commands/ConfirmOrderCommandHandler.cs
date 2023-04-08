@@ -31,11 +31,9 @@ namespace API.Application.Commands
             // Check Seat Availability before booking confirmation
             foreach (var item in order.OrderItems)
             {
-                var flight = await _flightRepository.GetAsync(item.FlightId);
-                var availability = flight.Rates
-                    .SingleOrDefault(r => r.Id == item.RateId)
-                    .Available;
-                var isAvailable = item.GetUnits() <= availability;
+                var flight = await _flightRepository.GetAsync(item.FlightId);;
+
+                var isAvailable = flight.IsFlightAvailable(item.RateId, item.GetUnits());
 
                 if (!isAvailable)
                 {
